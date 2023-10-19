@@ -18,10 +18,11 @@ options:
   -i , --input   Input file containing sequence list. Sequence names must be one name per line
   -f , --fasta   Input fasta file
   -o , --out     Output file name.
-  --format       Output format. Options: 'fasta', 'pir'. Default = fasta
+  --format       Output format. Options: 'fasta', 'pir', 'tab'. Default = fasta
   --quiet        Silence print messages. Default = false
 
 Thank you for using Fasta-Extractor. For more details, please visit the GitHub repository at https://github.com/Lachiemckbioinfo/fasta_extractor
+(venv) ljm028@8V0YK63:~/fasta_extractor$
 ```
 
 Fasta Extractor has three required commands: input file (your gene list, ```-i/--input```), fasta file (where you are extracting sequences from, ```-f/--fasta```), and output file (where fasta sequences are being saved to, ```-o/--out```).
@@ -35,7 +36,7 @@ python fasta_extractor.py --input genelist.txt --fasta sequences.fa --out output
 Fasta Extractor can be run in quiet mode to prevent printing to stdout by using the ```--quiet``` argument.
 
 #### Format
-The output format can be changed using the ```--format``` argument. Choices include FASTA and PIR formats. For example:
+The output format can be changed using the ```--format``` argument. Choices include FASTA, PIR and tab formats. For example:
 ```
 python fasta-extractor.py --input list.txt --fasta sequences.fa --out output_file.fasta --format fasta
 ```
