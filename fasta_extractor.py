@@ -41,7 +41,7 @@ parser.add_argument("--format",
                     metavar = "",
                     dest = "fmt",
                     choices = ["fasta", "pir"],
-                    help = "Output format. Default = fasta")
+                    help = "Output format. Options: 'fasta', 'pir'. Default = fasta")
 
 #If intending to use genbank or seqxml formats, then molecule type will have to be defined
 
@@ -61,19 +61,8 @@ outfile_name = outfile.name
 quiet = args.quiet
 fmt = args.fmt
 
-#Set open mode
-if fmt == 'seqxml':
-        openmode = "wb"
-else:
-    openmode = "w"
 
-
-#Input files
-#genelist_file = sys.argv[1]
-#input_fasta = sys.argv[2]
-#output_fasta = sys.argv[3]
-
-#ARead genelist_file and append lines to genelist
+#Read genelist_file and append lines to genelist
 genelist = []
 with genelist_file:
     while line := genelist_file.readline():
@@ -87,8 +76,11 @@ def extract_sequences(genelist, infile, outfile):
     #Establish a list of parsed and absent sequences so that unextracted fastas can later be identified
     genes_parsed = []
     missing_genes = []
+    
+
+
     #Open file and extract sequences
-    with open(outfile, openmode):
+    with outfile:
         for record in SeqIO.parse(infile, "fasta"):
             genes_parsed.append(record.id)
             if record.id in genelist:
@@ -115,6 +107,7 @@ def extract_sequences(genelist, infile, outfile):
 genecount, genes_found, missing_genes = extract_sequences(genelist, infile, outfile)
 if quiet == False:
     print(f"Extracted {genes_found} fasta sequences from {infile} and saved them to {outfile_name}.\n")
+    
 #Return missing genes
 if quiet == False:
     if len(missing_genes) > 0:
