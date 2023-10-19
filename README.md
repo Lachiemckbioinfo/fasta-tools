@@ -22,7 +22,6 @@ options:
   --quiet        Silence print messages. Default = false
 
 Thank you for using Fasta-Extractor. For more details, please visit the GitHub repository at https://github.com/Lachiemckbioinfo/fasta_extractor
-(venv) ljm028@8V0YK63:~/fasta_extractor$
 ```
 
 Fasta Extractor has three required commands: input file (your gene list, ```-i/--input```), fasta file (where you are extracting sequences from, ```-f/--fasta```), and output file (where fasta sequences are being saved to, ```-o/--out```).
