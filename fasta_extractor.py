@@ -35,6 +35,17 @@ parser.add_argument("-o", "--out",
                     help = "Output file name.")
 
 
+parser.add_argument("--format",
+                    required = False,
+                    default = "fasta",
+                    metavar = "",
+                    dest = "fmt",
+                    choices = ["fasta", "pir"],
+                    help = "Output format. Default = fasta")
+
+#If intending to use genbank or seqxml formats, then molecule type will have to be defined
+
+
 parser.add_argument("--quiet",
                     required=False,
                     help = "Silence print messages. Default = false",
@@ -48,6 +59,13 @@ infile = args.infile
 outfile = args.outfile
 outfile_name = outfile.name
 quiet = args.quiet
+fmt = args.fmt
+
+#Set open mode
+if fmt == 'seqxml':
+        openmode = "wb"
+else:
+    openmode = "w"
 
 
 #Input files
@@ -70,11 +88,11 @@ def extract_sequences(genelist, infile, outfile):
     genes_parsed = []
     missing_genes = []
     #Open file and extract sequences
-    with outfile:
+    with open(outfile, openmode):
         for record in SeqIO.parse(infile, "fasta"):
             genes_parsed.append(record.id)
             if record.id in genelist:
-                SeqIO.write(record, outfile, "fasta")
+                SeqIO.write(record, outfile, fmt)
                 genelist.remove(record.id)
                 genes_found += 1
                 if quiet == False:
