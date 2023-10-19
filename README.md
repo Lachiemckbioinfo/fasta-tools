@@ -24,7 +24,7 @@ Thank you for using Fasta-Extractor. For more details, please visit the GitHub r
 
 Fasta Extractor has three required commands: input file (your gene list, ```-i/--input```), fasta file (where you are extracting sequences from, ```-f/--fasta```), and output file (where fasta sequences are being saved to, ```-o/--out```).
 
-An example usage of Fasta Extractor would thus look like this:
+An example usage of Fasta Extractor would look like this:
 ```
 python fasta_extractor.py --input genelist.txt --fasta sequences.fa --out output_sequences.fa
 ```
