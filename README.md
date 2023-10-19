@@ -9,7 +9,7 @@ pip install -r requirements.txt
 
 ## Usage
 ```
-usage: Fasta-Extractor [-h] -i  -f  -o
+usage: Fasta-Extractor [-h] -i  -f  -o  [--quiet]
 
 Fasta-Extractor BioPython to extract fasta sequences from a multifasta using a list of sequence names
 
@@ -18,6 +18,7 @@ options:
   -i , --input   Input file containing sequence list. Sequence names must be one name per line
   -f , --fasta   Input fasta file
   -o , --out     Output file name.
+  --quiet        Silence print messages. Default = false
 
 Thank you for using Fasta-Extractor. For more details, please visit the GitHub repository at https://github.com/Lachiemckbioinfo/fasta_extractor
 ```
@@ -28,3 +29,5 @@ An example usage of Fasta Extractor would look like this:
 ```
 python fasta_extractor.py --input genelist.txt --fasta sequences.fa --out output_sequences.fa
 ```
+### Additional arguments
+Fasta Extractor can be run in quiet mode to prevent printing to stdout by using the ```--quiet``` argument.
