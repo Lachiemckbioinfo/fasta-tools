@@ -40,8 +40,8 @@ parser.add_argument("--format",
                     default = "fasta",
                     metavar = "",
                     dest = "fmt",
-                    choices = ["fasta", "pir"],
-                    help = "Output format. Options: 'fasta', 'pir'. Default = fasta")
+                    choices = ["fasta", "pir", "tab"],
+                    help = "Output format. Options: 'fasta', 'pir', 'tab'. Default = fasta")
 
 #If intending to use genbank or seqxml formats, then molecule type will have to be defined
 
@@ -107,7 +107,7 @@ def extract_sequences(genelist, infile, outfile):
 genecount, genes_found, missing_genes = extract_sequences(genelist, infile, outfile)
 if quiet == False:
     print(f"Extracted {genes_found} fasta sequences from {infile} and saved them to {outfile_name}.\n")
-    
+
 #Return missing genes
 if quiet == False:
     if len(missing_genes) > 0:
