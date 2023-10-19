@@ -9,7 +9,7 @@ github = "https://github.com/Lachiemckbioinfo/fasta_extractor"
 #Initiate argparse
 parser = argparse.ArgumentParser(
     prog = f'{progname}',
-    description = 'This program uses BioPython to extract fasta sequences from a multifasta using a list of sequence names',
+    description = f'{progname} BioPython to extract fasta sequences from a multifasta using a list of sequence names',
     epilog = f'Thank you for using {progname}. For more details, please visit the GitHub repository at {github}'
 )
 #Argparse arguments
@@ -35,12 +35,19 @@ parser.add_argument("-o", "--out",
                     help = "Output file name.")
 
 
+parser.add_argument("--quiet",
+                    required=False,
+                    help = "Silence print messages. Default = false",
+                    action = 'store_true')
+
+
 #Parse argparse parser parse
 args = parser.parse_args()
 genelist_file = args.genelist
 infile = args.infile
 outfile = args.outfile
 outfile_name = outfile.name
+quiet = args.quiet
 
 
 #Input files
@@ -70,11 +77,13 @@ def extract_sequences(genelist, infile, outfile):
                 SeqIO.write(record, outfile, "fasta")
                 genelist.remove(record.id)
                 genes_found += 1
-                print(f"Gene {record.id} extracted and saved to {outfile_name}")
+                if quiet == False:
+                    print(f"Gene {record.id} extracted and saved to {outfile_name}")
                 
                 #Break loop when all sequences are found
                 if not genelist:
-                    print("All genes extracted")
+                    if quiet == False:
+                        print("All genes extracted")
                     break
         if len(genelist) > 0:
             for gene in genelist:
@@ -86,9 +95,11 @@ def extract_sequences(genelist, infile, outfile):
 
 #Perform fasta sequence extraction
 genecount, genes_found, missing_genes = extract_sequences(genelist, infile, outfile)
-print(f"Extracted {genes_found} fasta sequences from {infile} and saved them to {outfile_name}.\n")
+if quiet == False:
+    print(f"Extracted {genes_found} fasta sequences from {infile} and saved them to {outfile_name}.\n")
 #Return missing genes
-if len(missing_genes) > 0:
-    print(f"{len(missing_genes)} fasta sequences were not found. Fasta sequences not found:")
-    for gene in missing_genes:
-        print(f"{gene}\n")
+if quiet == False:
+    if len(missing_genes) > 0:
+        print(f"{len(missing_genes)} fasta sequences were not found. Fasta sequences not found:")
+        for gene in missing_genes:
+            print(f"{gene}\n")
