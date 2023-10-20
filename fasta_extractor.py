@@ -40,10 +40,11 @@ parser.add_argument("--format",
                     default = "fasta",
                     metavar = "",
                     dest = "fmt",
-                    choices = ["fasta", "pir", "tab"],
+                    choices = ["fasta", "pir", "tab", "fasta-2line"],
                     help = "Output format. Options: 'fasta', 'pir', 'tab'. Default = fasta")
 
-#If intending to use genbank or seqxml formats, then molecule type will have to be defined
+#If intending to use genbank, seqxml or imgt formats, then molecule type will have to be defined
+#xdna works as well
 
 
 parser.add_argument("--quiet",
@@ -60,6 +61,13 @@ outfile = args.outfile
 outfile_name = outfile.name
 quiet = args.quiet
 fmt = args.fmt
+
+'''
+if fmt == 'xdna':
+    openmode = 'wb'
+else:
+    openmode = "w"
+'''
 
 
 #Read genelist_file and append lines to genelist
@@ -80,7 +88,10 @@ def extract_sequences(genelist, infile, outfile):
 
 
     #Open file and extract sequences
+    #with open(outfile, openmode):
     with outfile:
+        if quiet == False:
+                print(f'Reading fasta file {infile}')
         for record in SeqIO.parse(infile, "fasta"):
             genes_parsed.append(record.id)
             if record.id in genelist:
