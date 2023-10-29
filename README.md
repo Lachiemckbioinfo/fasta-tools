@@ -15,7 +15,8 @@ Fasta-Extractor BioPython to extract fasta sequences from a multifasta using a l
 
 options:
   -h, --help     show this help message and exit
-  -i , --input   Input file containing sequence list. Sequence names must be one name per line. If no file is entered, then the entire fasta file will be extracted.
+  -i , --input   Input file containing sequence list. Sequence names must be one name per line.
+                 If no file is entered, then the entire fasta file will be extracted.
   -f , --fasta   Input fasta file
   -o , --out     Output file name.
   --format       Output format. Options: 'fasta', 'fasta-2line', 'pir', 'tab'. Default = fasta
