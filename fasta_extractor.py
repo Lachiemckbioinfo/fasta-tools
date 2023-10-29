@@ -107,7 +107,7 @@ def extract_sequences(genelist, infile, outfile):
                 genelist.remove(record.id)
                 genes_found += 1
                 if quiet == False:
-                    print(f"Gene {record.id} extracted and saved to {outfile_name}")
+                    print(f"Gene {record.id} extracted and saved to {outfile_name} ({genes_found}/{genecount})")
                 
                 #Break loop when all sequences are found
                 if not genelist:
