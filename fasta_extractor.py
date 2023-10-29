@@ -19,7 +19,7 @@ parser.add_argument("-i", "--input",
                     type = argparse.FileType('r'),
                     metavar = '',
                     dest = "genelist",
-                    help = 'Input file containing sequence list. Sequence names must be one name per line. If no file entered, then entire fasta file will be extracted.')
+                    help = 'Input file containing sequence list. Sequence names must be one name per line. If no file is entered, then the entire fasta file will be extracted.')
 
 parser.add_argument('-f', "--fasta",
                     dest = 'infile',
@@ -100,8 +100,6 @@ def extract_sequences(genelist, infile, outfile):
                 print(f'Reading fasta file {infile}')
         for record in SeqIO.parse(infile, "fasta"):
             genes_parsed.append(record.id)
-            if genelist_file is None:
-                genelist.append(record.id)
             if record.id in genelist:
                 SeqIO.write(record, outfile, fmt)
                 genelist.remove(record.id)
