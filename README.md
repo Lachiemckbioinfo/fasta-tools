@@ -3,6 +3,7 @@
 This repository contains several scripts I have used during my research to manipulate fasta files using BioPython. The tools in this list include:
 + Fasta extractor: Extract fasta sequences from a multifasta using a list, or extract all at once. This can also be used to transform fasta format between formats, including fasta, fasta-2line, tab, and pir.
 + update_descriptions.py: Take the fasta descriptions from one multifasta and apply them to fasta sequences of the same name from another. Useful for transferring annotations between fasta files where the names may be identical, but the data is not (for instance, between protein and CDS sequences).
++ find_duplicates.py: This Python script uses BioPython to parse through a multifasta and print sequence IDs of sequences with duplicated names.
 
 ## Installation
 The only external requirement that these scripts need is BioPython. This can be installed using pip.
@@ -50,7 +51,7 @@ python fasta-extractor.py --input list.txt --fasta sequences.fa --out output_fil
 ```
 
 
-# update-descriptions.py
+# update_descriptions.py
 This script is used to take the fasta descriptions from one file, and apply them to sequences of the same name in another file. I generated this tool as I had protein sequences with annotations, but my CDS descriptions did not have those annotations. Thus, this tool was made to take the protein descriptions and apply them to the CDS fastas of the same name.
 
 ## Usage
@@ -60,3 +61,10 @@ python update-descriptions.py template-fasta.fa query-fasta.fa output.fa
 ```
 
 As it runs, this script also generates a logfile. This logs all the sequences in the query fasta that were not updated, typically due to them not being in the template, or their names not matching.
+
+
+# find_duplicates.py
+This script uses a single positional argument, which is used to select the fasta file to be searched. This script can be used using the following code:
+```
+python find_duplicates.py <fasta_file>
+```
