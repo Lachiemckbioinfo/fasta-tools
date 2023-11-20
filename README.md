@@ -1,11 +1,14 @@
-# Fasta extractor
-Fasta Extractor is a straightforward Python script for extracting fasta sequences from a multifasta file using a list of sequence names. Fasta extractor uses Argparse and BioPython to parse input files and fasta sequences.
-
+# Overview
 ## Installation
-The only external requirement that Fasta Extractor needs is BioPython. This can be installed using pip.
+The only external requirement that these scripts need is BioPython. This can be installed using pip.
 ```
 pip install -r requirements.txt
 ```
+
+# Fasta extractor
+Fasta Extractor is a straightforward Python script for extracting fasta sequences from a multifasta file using a list of sequence names. Fasta extractor uses Argparse and BioPython to parse input files and fasta sequences.
+
+
 
 ## Usage
 ```
@@ -40,3 +43,15 @@ The output format can be changed using the ```--format``` argument. Choices incl
 ```
 python fasta-extractor.py --input list.txt --fasta sequences.fa --out output_file.fasta --format fasta
 ```
+
+
+# update-descriptions.py
+This script is used to take the fasta descriptions from one file, and apply them to sequences of the same name in another file. I generated this tool as I had protein sequences with annotations, but my CDS descriptions did not have those annotations. Thus, this tool was made to take the protein descriptions and apply them to the CDS fastas of the same name.
+
+## Usage
+This script uses simple positional arguments to run. Three positional arguments are used. These are (in order): template fasta (which has the descriptions), query fasta (which doesn't have the descriptions), and output fasta. Thus, to use this script, use the following code:
+```
+python update-descriptions.py template-fasta.fa query-fasta.fa output.fa
+```
+
+As it runs, this script also generates a logfile. This logs all the sequences in the query fasta that were not updated, typically due to them not being in the template, or their names not matching.
