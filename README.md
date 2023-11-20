@@ -1,4 +1,9 @@
 # Overview
+## Scripts
+This repository contains several scripts I have used during my research to manipulate fasta files using BioPython. The tools in this list include:
++ Fasta extractor: Extract fasta sequences from a multifasta using a list, or extract all at once. This can also be used to transform fasta format between formats, including fasta, fasta-2line, tab, and pir.
++ update_descriptions.py: Take the fasta descriptions from one multifasta and apply them to fasta sequences of the same name from another. Useful for transferring annotations between fasta files where the names may be identical, but the data is not (for instance, between protein and CDS sequences).
+
 ## Installation
 The only external requirement that these scripts need is BioPython. This can be installed using pip.
 ```
