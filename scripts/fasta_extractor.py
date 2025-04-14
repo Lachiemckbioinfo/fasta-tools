@@ -53,7 +53,7 @@ parser.add_argument("--quiet",
                     action = 'store_true')
 
 
-#Parse argparse parser parse
+# Parse argparse parser parse
 args = parser.parse_args()
 genelist_file = args.genelist
 infile = args.infile
@@ -70,7 +70,7 @@ else:
 '''
 
 
-#Read genelist_file and append lines to genelist
+# Read genelist_file and append lines to genelist
 genelist = []
 if genelist_file is not None:
     with genelist_file:
@@ -84,10 +84,10 @@ else:
 
 
 def extract_sequences(genelist, infile, outfile):
-    #Start counters
+    # Start counters
     genecount = len(genelist)
     genes_found = 0
-    #Establish a list of parsed and absent sequences so that unextracted fastas can later be identified
+    # Establish a list of parsed and absent sequences so that unextracted fastas can later be identified
     genes_parsed = []
     missing_genes = []
     
@@ -107,7 +107,7 @@ def extract_sequences(genelist, infile, outfile):
                 if quiet == False:
                     print(f"Gene {record.id} extracted and saved to {outfile_name} ({genes_found}/{genecount})")
                 
-                #Break loop when all sequences are found
+                # Break loop when all sequences are found
                 if not genelist:
                     if quiet == False:
                         print("All genes extracted")
@@ -120,13 +120,12 @@ def extract_sequences(genelist, infile, outfile):
     return genecount, genes_found, missing_genes
 
 
-#Perform fasta sequence extraction
+# Perform fasta sequence extraction
 genecount, genes_found, missing_genes = extract_sequences(genelist, infile, outfile)
+# Print finishing status to screen
 if quiet == False:
     print(f"Extracted {genes_found} fasta sequences from {infile} and saved them to {outfile_name}.\n")
-
-#Return missing genes
-if quiet == False:
+# If genes are missing, print them to screen
     if len(missing_genes) > 0:
         print(f"{len(missing_genes)} fasta sequences were not found. Fasta sequences not found:")
         for gene in missing_genes:
